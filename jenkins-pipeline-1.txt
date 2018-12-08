@@ -1,0 +1,32 @@
+pipeline {
+    agent {
+      label 'ssh-slave'
+    }
+    stages {
+        stage('Preparation') { // for display purposes
+            steps {
+                sh "echo preparation"
+            }
+       }
+       stage('Build') {
+           steps {
+				sh "echo build"
+           }
+
+       }
+       stage('Test') {
+           parallel {
+               stage('Case A') {
+                    steps {
+                        echo "test A"
+                    }
+               }
+               stage ('Case B') {
+                    steps {
+                        echo "test B"
+                    }
+               }
+           }
+       }
+    }
+}
